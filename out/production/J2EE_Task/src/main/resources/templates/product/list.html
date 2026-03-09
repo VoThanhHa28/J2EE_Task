@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{_layout}">
+
+<head>
+  <title>Danh sách sản phẩm</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+  <div class="d-flex justify-content-between mb-3">
+    <h2>Danh sách sản phẩm</h2>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/create}" class="btn btn-primary">
+      Create New Product
+    </a>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Image</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="product : ${products}">
+      <td th:text="${product.id}"></td>
+      <td th:text="${product.name}"></td>
+      <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></td>
+
+      <td>
+        <img th:if="${product.image != null}"
+             th:src="@{/images/{img}(img=${product.image})}"
+             width="100"
+             class="img-thumbnail"/>
+      </td>
+
+      <td th:text="${product.category != null ? product.category.name : ''}"></td>
+
+      <td>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/edit/{id}(id=${product.id})}"
+           class="btn btn-sm btn-secondary">Edit</a>
+
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/delete/{id}(id=${product.id})}"
+           onclick="return confirm('Bạn có chắc muốn xóa?')"
+           class="btn btn-sm btn-danger">Delete</a>
+      </td>
+    </tr>
+
+    <tr th:if="${#lists.isEmpty(products)}">
+      <td colspan="6" class="text-center">
+        Chưa có sản phẩm nào.
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</div>
+</body>
+</html>

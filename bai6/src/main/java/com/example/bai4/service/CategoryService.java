@@ -1,11 +1,10 @@
 package com.example.bai4.service;
 
 import com.example.bai4.model.Category;
-import com.example.bai4.model.Product;
 import com.example.bai4.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 

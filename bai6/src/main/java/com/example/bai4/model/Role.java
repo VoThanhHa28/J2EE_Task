@@ -1,8 +1,8 @@
-package com.example.bai4.model;
-
+package  com.example.bai4.model;
 import jakarta.persistence.*;
-import lombok.*;
 
+import lombok.*;
+import jakarta.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor

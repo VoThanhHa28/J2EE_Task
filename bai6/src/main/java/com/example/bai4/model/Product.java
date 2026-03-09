@@ -1,5 +1,6 @@
 package com.example.bai4.model;
 
+import com.example.bai4.model.Category;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import jakarta.persistence.Id;
 
 @Entity
 @Table(name = "product")
