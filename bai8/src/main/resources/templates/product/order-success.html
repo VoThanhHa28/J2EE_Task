@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+<head>
+  <title>Đơn hàng thành công</title>
+  <style>
+    .success-container {
+      max-width: 900px;
+      margin: 0 auto;
+      margin-top: 30px;
+    }
+    .success-header {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+      color: white;
+      border-radius: 8px 8px 0 0;
+    }
+    .success-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+    .success-header h2 {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+    }
+    .success-header p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    .order-details {
+      background: white;
+      padding: 30px;
+      border-bottom: 1px solid #eee;
+    }
+    .detail-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 20px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    .detail-label {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    .detail-value {
+      color: #7f8c8d;
+    }
+    .order-items {
+      background: white;
+      padding: 30px;
+    }
+    .order-items h4 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+    .item-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+      align-items: center;
+    }
+    .item-row:last-child {
+      border-bottom: none;
+    }
+    .item-header {
+      font-weight: 600;
+      color: #2c3e50;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+    .item-name {
+      font-weight: 500;
+    }
+    .item-price {
+      text-align: center;
+      color: #e74c3c;
+      font-weight: 600;
+    }
+    .item-qty {
+      text-align: center;
+    }
+    .item-total {
+      text-align: right;
+      color: #e74c3c;
+      font-weight: 600;
+    }
+    .order-summary {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 0 0 8px 8px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 0;
+      font-size: 16px;
+    }
+    .summary-row:last-child {
+      border-top: 2px solid white;
+      padding-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #e74c3c;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+      justify-content: center;
+    }
+    .btn-primary {
+      padding: 12px 30px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+    .btn-secondary {
+      padding: 12px 30px;
+      background-color: #95a5a6;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn-secondary:hover {
+      background-color: #7f8c8d;
+    }
+    .info-box {
+      background-color: #e8f4f8;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+    .info-box p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+  <div class="success-container">
+    <!-- SUCCESS HEADER -->
+    <div class="success-header">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Đơn hàng thành công!</h2>
+      <p>Cảm ơn bạn đã mua hàng. Chúng tôi đang chuẩn bị đơn hàng của bạn.</p>
+    </div>
+
+    <!-- ORDER DETAILS -->
+    <div class="order-details">
+      <h3>Thông tin đơn hàng</h3>
+
+      <div class="detail-row">
+        <div class="detail-label">Mã đơn hàng:</div>
+        <div class="detail-value" th:text="'#' + ${order.id}"></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Tên khách hàng:</div>
+        <div class="detail-value" th:text="${order.customerName}"></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Email:</div>
+        <div class="detail-value" th:text="${order.customerEmail}"></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Số điện thoại:</div>
+        <div class="detail-value" th:text="${order.customerPhone}"></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Địa chỉ giao:</div>
+        <div class="detail-value" th:text="${order.customerAddress}"></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Ngày đặt:</div>
+        <div class="detail-value" th:text="${#temporals.format(order.createdDate, 'dd/MM/yyyy HH:mm')}"></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Trạng thái:</div>
+        <div class="detail-value">
+          <span style="background-color: #ffc107; padding: 4px 10px; border-radius: 4px; color: white; font-weight: 600;" 
+                th:text="${order.status}"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDER ITEMS -->
+    <div class="order-items">
+      <h4>Chi tiết sản phẩm</h4>
+
+      <div style="overflow-x: auto;">
+        <div class="item-row">
+          <div class="item-header">Tên sản phẩm</div>
+          <div class="item-header">Giá</div>
+          <div class="item-header">Số lượng</div>
+          <div class="item-header" style="text-align: right;">Thành tiền</div>
+        </div>
+
+        <div th:each="detail : ${orderDetails}" class="item-row">
+          <div class="item-name" th:text="${detail.productName}"></div>
+          <div class="item-price" th:text="'₫' + ${#numbers.formatDecimal(detail.price, 0, 'COMMA', 0, 'POINT')}"></div>
+          <div class="item-qty" th:text="${detail.quantity}"></div>
+          <div class="item-total" th:text="'₫' + ${#numbers.formatDecimal(detail.totalPrice, 0, 'COMMA', 0, 'POINT')}"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="order-summary">
+      <div class="summary-row">
+        <span>Tổng tiền hàng:</span>
+        <span th:text="'₫' + ${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>
+      </div>
+      <div class="summary-row">
+        <span>Phí vận chuyển:</span>
+        <span>Miễn phí</span>
+      </div>
+      <div class="summary-row">
+        <span>Tổng cộng:</span>
+        <span th:text="'₫' + ${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>
+      </div>
+    </div>
+
+    <!-- INFO BOX -->
+    <div class="info-box">
+      <i class="fas fa-info-circle"></i>
+      <p><strong>Xác nhận đơn hàng:</strong> Chúng tôi sẽ gửi email xác nhận đến địa chỉ <span th:text="${order.customerEmail}"></span></p>
+      <p><strong>Thời gian giao hàng:</strong> Dự kiến 3-5 ngày làm việc (Thứ Hai - Thứ Sáu)</p>
+      <p><strong>Hỗ trợ:</strong> Nếu có thắc mắc, vui lòng liên hệ: support@example.com</p>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="actions">
+      <a th:href="@{/products}" class="btn-primary">
+        <i class="fas fa-shopping-bag"></i> Tiếp tục mua sắm
+      </a>
+      <button onclick="window.print()" class="btn-secondary">
+        <i class="fas fa-print"></i> In đơn hàng
+      </button>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
